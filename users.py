@@ -9,6 +9,7 @@ def initialize(database):
              (ID INT PRIMARY KEY NOT NULL,
              TWITTERID INT UNIQUE NOT NULL,
              PUBLICKEY TEXT NOT NULL);''')
+    conn.commit()
     conn.close()
     pass
 
@@ -37,5 +38,6 @@ def create_user_db(database, username, public_key):
     cursor = conn.cursor()
 
     cursor.execute('''INSERT INTO USERS(TWITTERID, PUBLICKEY) VALUES(?,?)''', (username, public_key))
+    conn.commit()
     conn.close()
     pass
