@@ -39,8 +39,8 @@ def twitter_public_key_update():
     result = twitter_public_keys_insert_or_replace(database, twitter_user_id, public_key)
 
     reponse = {
-        'api_version': '0.1.0'
-        'source': '/api/v1/twitter/public_key/update'
+        'api_version': '0.1.0',
+        'source': '/api/v1/twitter/public_key/update',
         'success': True,
         'data': {
             'twitterUserId': result['twitterUserId'],
