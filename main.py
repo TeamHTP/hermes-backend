@@ -8,7 +8,8 @@ app = Flask(__name__)
 def test():
     username = request.args.get('user_uuid', '')
     service = request.args.get('user_service', '')
-    pass
+    print(username)
+    print(service)
 
 
 @app.route('/user/create', methods=['GET'])
@@ -16,7 +17,9 @@ def create_user():
     username = request.args.get('user_uid', '')
     service = request.args.get('user_service', '')
     public_key = request.args.get('user_public_key', '')
-    pass
+    print(username)
+    print(service)
+    print(public_key)
 
 
 if __name__ == '__main__':
