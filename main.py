@@ -4,8 +4,8 @@ from flask import Flask, request
 app = Flask(__name__)
 
 
-@app.route('/test', methods=['GET'])
-def test():
+@app.route('/user/find', methods=['GET'])
+def find_user():
     username = request.args.get('user_uuid', '')
     service = request.args.get('user_service', '')
     print(username)
