@@ -8,7 +8,7 @@ def initialize(database):
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS TwitterPublicKey
         (
-            TwitterId INT PRIMARY KEY,
+            TwitterId TEXT PRIMARY KEY,
             PublicKey TEXT NOT NULL
         );
         ''')
