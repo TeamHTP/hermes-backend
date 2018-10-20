@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/user/find', methods=['GET'])
 def find_user():
-    username = request.args.get('user_uuid', '')
+    username = request.args.get('user_uid', '')
     service = request.args.get('user_service', '')
     print(username)
     print(service)
