@@ -3,6 +3,7 @@ from users import *
 
 app = Flask(__name__)
 database = 'hermes.db'
+initialize(database)
 
 
 @app.route('/user/find', methods=['GET'])
@@ -19,11 +20,10 @@ def create_user():
     username = request.args.get('user_uid', '')
     # service = request.args.get('user_service', '')
     public_key = request.args.get('user_public_key', '')
-    create_user_db(username, public_key)
+    create_user_db(database, username, public_key)
     # return jsonify([username, service, public_key])
     return jsonify([username, public_key])
 
 
 if __name__ == '__main__':
-    initialize(database)
     app.run(host='0.0.0.0')

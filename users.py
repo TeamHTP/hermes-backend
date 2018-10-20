@@ -6,7 +6,7 @@ def initialize(database):
     cursor = conn.cursor()
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS USERS
-             (ID INT PRIMARY KEY NOT NULL,
+             (ID INT PRIMARY KEY,
              TWITTERID INT UNIQUE NOT NULL,
              PUBLICKEY TEXT NOT NULL);''')
     conn.commit()
@@ -25,7 +25,7 @@ def find_user_db(database, username):
     conn = sqlite3.connect(database)
     cursor = conn.cursor()
 
-    cursor.execute('''SELECT PUBLICKEY FROM USERS WHERE TWITERID=?''', (username,))
+    cursor.execute('''SELECT PUBLICKEY FROM USERS WHERE TWITTERID=?''', (username,))
     public_key = cursor.fetchone()
     conn.close()
     if public_key:
