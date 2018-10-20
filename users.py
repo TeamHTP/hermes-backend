@@ -5,39 +5,53 @@ def initialize(database):
     conn = sqlite3.connect(database)
     cursor = conn.cursor()
 
-    cursor.execute('''CREATE TABLE IF NOT EXISTS USERS
-             (ID INT PRIMARY KEY,
-             TWITTERID INT UNIQUE NOT NULL,
-             PUBLICKEY TEXT NOT NULL);''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS TwitterPublicKey
+        (
+            TwitterId INT PRIMARY KEY,
+            PublicKey TEXT NOT NULL
+        );
+        ''')
     conn.commit()
     conn.close()
-    pass
 
-
-# def find_user_db(database, username, service):
-# #     pass
-# #
-# #
-# # def create_user_db(database, username, service, public_key):
-# #     pass
-
-def find_user_db(database, username):
+def twitter_public_keys_select(database, twitter_user_id):
     conn = sqlite3.connect(database)
     cursor = conn.cursor()
 
-    cursor.execute('''SELECT PUBLICKEY FROM USERS WHERE TWITTERID=?''', (username,))
-    public_key = cursor.fetchone()
+    cursor.execute('''
+        SELECT PublicKey
+        FROM TwitterPublicKey
+        WHERE TwitterId=?
+    ''', (twitter_user_id,))
+    select_result = cursor.fetchone()
     conn.close()
-    if public_key:
-        return public_key
-    return 'No user'
 
+    result = {
+        'twitterUserId': twitter_user_id
+    }
 
-def create_user_db(database, username, public_key):
+    if select_result:
+        (public_key,) = select_result
+        result['publicKey'] = public_key
+    
+    return result
+
+def twitter_public_keys_insert_or_replace(database, twitter_user_id, public_key):
     conn = sqlite3.connect(database)
     cursor = conn.cursor()
 
-    cursor.execute('''INSERT INTO USERS(TWITTERID, PUBLICKEY) VALUES(?,?)''', (username, public_key))
+    cursor.execute('''
+        INSERT OR REPLACE
+        INTO TwitterPublicKey(TwitterId, PublicKey)
+        VALUES(?,?)
+    ''', (twitter_user_id, public_key))
     conn.commit()
     conn.close()
-    pass
+
+    result = {
+        'twitterUserId': twitter_user_id,
+        'publicKey': public_key
+    }
+
+    return result
