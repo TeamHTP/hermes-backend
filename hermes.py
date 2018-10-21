@@ -34,7 +34,7 @@ def twitter_public_key_get():
         })
 
     return make_response((jsonify(response_json), response_code, {
-        'Access-Control-Allow-Origin': 'https://twitter.com',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET'
     }))
 
@@ -56,7 +56,7 @@ def twitter_public_key_update():
     }
 
     return make_response((jsonify(response_json), response_code, {
-        'Access-Control-Allow-Origin': 'https://twitter.com',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET'
     }))
 
