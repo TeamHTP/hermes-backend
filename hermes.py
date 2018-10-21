@@ -40,7 +40,7 @@ def twitter_public_key_get():
 
 @app.route('/api/v1/twitter/public_key/update', methods=['GET'])
 def twitter_public_key_update():
-    twitter_user_id = request.args.get('twttier_user_id', '')
+    twitter_user_id = request.args.get('twitter_user_id', '')
     public_key = request.args.get('public_key', '')
     result = twitter_public_keys_insert_or_replace(database, twitter_user_id, public_key)
 
