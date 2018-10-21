@@ -1,10 +1,15 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, render_template
 from users import *
 
 
 app = Flask(__name__)
 database = 'hermes.db'
 initialize(database)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 @app.route('/api/v1/twitter/public_key/get', methods=['GET'])
